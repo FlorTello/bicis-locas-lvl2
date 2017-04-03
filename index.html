@@ -12,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css?family=Prompt:200,300,400,500" rel="stylesheet">
     <!-- Optional theme -->
     <link rel="stylesheet" href="css/registro.css">
+    <link rel="stylesheet" href="css/validar.css"  rel="stylesheet">
+
   </head>
   <body>
     <section class="form-container">
@@ -20,29 +22,29 @@
           <h2 id="form-signup-heading">
             Bicis Locas
           </h2>
-          <div class="name-container input-box">
+          <div class="name-container input-box" id = "div-name">
             <label for="name" class="sr-only">Nombre</label>
             <input type="text" id="name" class="form-control"
             placeholder="Ingrese su nombre">
           </div>
-          <div class="lastname-container input-box">
+          <div class="lastname-container input-box" id = "div-lastname">
             <label for="lastname" class="sr-only">Apellido</label>
             <input type="text" id="lastname" class="form-control"
             placeholder="Ingrese su apellido">
           </div>
-          <div class="email-container input-box">
+          <div class="email-container input-box" id = "div-email">
             <label for="inputEmail" class="sr-only">
               Correo Electrónico
             </label>
             <input type="email" id="input-email" class="form-control" placeholder="Ingrese su correo electrónico" autofocus="">
           </div>
-          <div class="form-group input-box">
+          <div class="form-group input-box" id = 'div-password'>
             <label for="inputPassword" class="sr-only">
               Contraseña
             </label>
             <input type="password" id="input-password" class="form-control" placeholder="Ingrese su contraseña">
           </div>
-          <div class="form-group input-box">
+          <div class="form-group input-box" id = 'div-bicis'>
             <select class="form-control">
               <option value="0">Selecciona tu tipo de bici</option>
               <option value="urbana">Urbana</option>
@@ -63,7 +65,7 @@
           </div>
           <button class="btn btn-lg btn-primary btn-block submit-btn" type="submit">Registrar</button>
         </form>
-      </div>  
+      </div>
     </section>
     <!-- /container -->
     <script type='text/javascript' src='js/main.js'></script>
