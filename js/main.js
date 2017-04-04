@@ -19,22 +19,26 @@ textInputs[2].addEventListener('blur',function(e){
     span.textContent = "El Email debe ser Valido Ejm. name@domain.com \n ";
     this.parentNode.appendChild(span);
     this.focus();
+    return false;
 	}
   else{
     ocultarTooltip();
+    return true;
   }
 });
 //Validando el input de Password
 textInputs[3].addEventListener('blur',function(){
-  ocultarTooltip();
   var span = crearTooltip('');
+  ocultarTooltip();
   if(this.value == "" || this.value.length < 6 || this.value == '123456' || this.value == '098754' || this.value == 'password'){
     span.textContent = "El Password debe tener al menos 6 caracteres o diferente\n";
     this.parentNode.appendChild(span);
     this.focus();
+    return false;
   }
   else{
     ocultarTooltip();
+    return true;
   }
 });
 
@@ -48,6 +52,7 @@ function validarInputText(inputText,ExpReg){
       span.textContent = "La primera letra de cada palabra debe empezar con mayuscula";
       inputText.parentNode.appendChild(span);
       inputText.focus();
+      return false;
     }
     else{
       ocultarTooltip();
@@ -71,23 +76,44 @@ function ocultarTooltip(){
 }
 //Función que se ejecuta en el evento click del boton Registrar
 function validateForm(){
+  var ExpNombre = /([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/;
   var span = crearTooltip('');//creando Tootip Vacio paa modificar textContent
   var opcion = document.getElementsByClassName('form-control')[4];
   //Expresiones Regulares
   var ExpEmail = /^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i;
   ocultarTooltip();
   //Validando Que todos los datos no esten vacios antes de envíar a registrar
-  if(textInputs[0].value == "" && textInputs[1].value == "" && textInputs[2].value == "" && textInputs[3].value == "" && opcion.value == 0){
+  if(textInputs[0].value.trim() == "" && textInputs[1].value.trim() == "" && textInputs[2].value.trim() == "" && textInputs[3].value.trim() == "" && opcion.value.trim() == 0){
     document.getElementsByTagName('div')[9].append(crearTooltip('Debe llenar todos los datos'));
     textInputs[0].focus();
   }
+  else if(validarInputText(textInputs[0],ExpNombre) == false){
+    ocultarTooltip();
+    document.getElementsByTagName('div')[9].append(crearTooltip('Debe llenar todos los datos'));
+    // textInputs[1].focus();
+  }
+  else if(validarInputText(textInputs[1],ExpNombre) == false){
+    // textInputs[2].focus();
+    ocultarTooltip();
+    document.getElementsByTagName('div')[9].append(crearTooltip('Debe llenar todos los datos'));
+  }
+  else if(textInputs[2].value == "" || !ExpEmail.test(textInputs[2].value)){
+    span.textContent = "El Email debe ser Valido Ejm. name@domain.com \n ";
+    textInputs[2].parentNode.appendChild(span);
+    textInputs[2].focus();
+	}
+	else if(textInputs[3].value == "" || textInputs[3].value.length < 6 || textInputs[3].value == '123456' || textInputs[3].value == '098754' || textInputs[3].value == 'password'){
+    span.textContent = "El Password debe tener al menos 6 caracteres o diferente\n";
+    textInputs[3].parentNode.appendChild(span);
+    textInputs[3].focus();
+	}
   else if(opcion.value == 0){ //Validando la selección de al menos una bicicleta
     ocultarTooltip();
     span.textContent = "Debe seleccionar una Bici\n";
     document.getElementById('div-bicis').appendChild(span);
   	opcion.focus();
   }
-  else {
+  else{
     ocultarTooltip();
     document.getElementsByTagName('div')[9].append(crearTooltip('Datos Correctos :D'));
   }
